@@ -1,0 +1,16 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketNotification
+metadata:
+  name: bucket-kafka-notification
+spec:
+  forProvider:
+    bucket: <YOUR_BUCKET_NAME>
+    topic:
+      - id: kafka-all-events
+        events:
+          - "s3:ObjectCreated:*"
+          - "s3:ObjectRemoved:*"
+        topicArn: "kafka-notif-connection/connect.json"
+    region: us-east-1  # required by provider but ignored by NooBaa
+  providerConfigRef:
+    name: noobaa-s3

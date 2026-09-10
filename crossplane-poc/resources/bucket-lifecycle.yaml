@@ -1,0 +1,23 @@
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: BucketLifecycleConfiguration
+metadata:
+  name: bucket-lifecycle-expiration
+spec:
+  forProvider:
+    bucket: <YOUR_BUCKET_NAME>
+    rule:
+      # ┌─────────────────────────────────────────────────────┐
+      # │  CONFIGURE EXPIRATION DAYS BELOW                    │
+      # │  Change the value of "days" to match your           │
+      # │  retention requirements.                            │
+      # │  Current setting: 7 days                            │
+      # └─────────────────────────────────────────────────────┘
+      - id: auto-expire-objects
+        status: Enabled
+        filter:
+          - prefix: ""
+        expiration:
+          - days: 7
+    region: us-east-1  # required by provider but ignored by NooBaa
+  providerConfigRef:
+    name: noobaa-s3

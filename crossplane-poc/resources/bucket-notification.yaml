@@ -11,6 +11,6 @@ spec:
           - "s3:ObjectCreated:*"
           - "s3:ObjectRemoved:*"
         topicArn: "kafka-notif-connection/connect.json"
-    region: us-east-1  # required by provider but ignored by NooBaa
+    region: us-east-1
   providerConfigRef:
     name: noobaa-s3

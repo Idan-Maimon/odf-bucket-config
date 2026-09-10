@@ -24,11 +24,13 @@ spec:
       name: noobaa-s3-credentials
       key: credentials
   endpoint:
-    # The NooBaa S3 route URL
     url:
       type: Static
-      static: https://s3-openshift-storage.apps.ocp.ptgzp.sandbox3640.opentlc.com
+      static: https://<S3_ROUTE>
     hostnameImmutable: true
+    services:
+      - s3
+    source: Custom
   skip_credentials_validation: true
   skip_metadata_api_check: true
   skip_region_validation: true

@@ -4,13 +4,3 @@ metadata:
   name: provider-aws-s3
 spec:
   package: xpkg.upbound.io/upbound/provider-aws-s3:v1.20.0
-  controllerConfigRef:
-    name: provider-aws-s3-config
----
-apiVersion: pkg.crossplane.io/v1alpha1
-kind: ControllerConfig
-metadata:
-  name: provider-aws-s3-config
-spec:
-  args:
-    - --debug

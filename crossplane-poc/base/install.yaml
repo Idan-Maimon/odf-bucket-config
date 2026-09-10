@@ -1,11 +1,24 @@
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: crossplane
-  namespace: openshift-operators
-spec:
-  channel: stable
-  name: crossplane
-  source: community-operators
-  sourceNamespace: openshift-marketplace
-  installPlanApproval: Automatic
+# Crossplane is installed via Helm (not OLM).
+# The community-operators OLM package ships Crossplane v1.5.1 which is
+# incompatible with modern Upbound providers (v1.14+).
+#
+# Install Crossplane v2.4.0 via Helm:
+#
+#   helm repo add crossplane-stable https://charts.crossplane.io/stable
+#   helm repo update
+#   helm install crossplane crossplane-stable/crossplane \
+#     --namespace crossplane-system --create-namespace \
+#     --version 2.4.0 \
+#     --wait
+#
+# On OpenShift, Crossplane pods need the anyuid SCC:
+#
+#   oc adm policy add-scc-to-user anyuid -z crossplane -n crossplane-system
+#   oc adm policy add-scc-to-user anyuid -z rbac-manager -n crossplane-system
+#
+# After installing a provider, grant anyuid to its service accounts as well:
+#
+#   oc adm policy add-scc-to-user anyuid -z provider-aws-s3-* -n crossplane-system
+#   oc adm policy add-scc-to-user anyuid -z upbound-provider-family-aws-* -n crossplane-system
+#
+# See setup.sh for the automated flow.

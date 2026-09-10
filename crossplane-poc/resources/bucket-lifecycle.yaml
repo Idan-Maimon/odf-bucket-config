@@ -6,18 +6,13 @@ spec:
   forProvider:
     bucket: <YOUR_BUCKET_NAME>
     rule:
-      # ┌─────────────────────────────────────────────────────┐
-      # │  CONFIGURE EXPIRATION DAYS BELOW                    │
-      # │  Change the value of "days" to match your           │
-      # │  retention requirements.                            │
-      # │  Current setting: 7 days                            │
-      # └─────────────────────────────────────────────────────┘
+      # Change "days" to match your retention requirements (7 is a placeholder).
       - id: auto-expire-objects
         status: Enabled
         filter:
           - prefix: ""
         expiration:
           - days: 7
-    region: us-east-1  # required by provider but ignored by NooBaa
+    region: us-east-1
   providerConfigRef:
     name: noobaa-s3
